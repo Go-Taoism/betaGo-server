@@ -17,6 +17,7 @@ export class UserController {
 
   @Post('/create')
   async createUser(@Res() res, @Body() createUserDto: CreateUserDTO) {
+    console.log(createUserDto);
     const customer = await this.userService.addUser(createUserDto);
     return res.status(HttpStatus.OK).json({
       message: 'Customer has been created successfully',
@@ -32,7 +33,7 @@ export class UserController {
   }
 
   // Fetch a particular customer using ID
-  @Get('user/:userID')
+  @Get('/:userID')
   async getCustomer(@Res() res, @Param('userID') userID) {
     const customer = await this.userService.getUser(userID);
     if (!customer) throw new NotFoundException('Customer does not exist!');
