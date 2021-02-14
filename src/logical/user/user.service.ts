@@ -14,13 +14,19 @@ export class UserService {
   }
   // Get a single User
   async getUser(UserID): Promise<User> {
-    const User = await this.userModel.findById(UserID).exec();
+    const User = await this.userModel.findOne({name: UserID});
     return User;
   }
   // post a single User
   async addUser(createUserDTO: CreateUserDTO): Promise<User> {
-    const newUser = new this.userModel(createUserDTO);
-    return newUser.save();
+    let user = await this.userModel.findOne({name: createUserDTO.name});
+    console.log(user);
+    if (! user) {
+      const newUser = new this.userModel(createUserDTO);
+      return newUser.save();
+    } else {
+      throw Error('username already existed');
+    }
   }
   // Edit User details
   async updateUser(UserID, createUserDTO: CreateUserDTO): Promise<User> {
