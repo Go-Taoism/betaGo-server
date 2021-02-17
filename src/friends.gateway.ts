@@ -3,8 +3,8 @@ import { Socket, Server } from 'socket.io';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-@WebSocketGateway()
-export class EventsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
+@WebSocketGateway({namespace: 'friends'})
+export class FriendsGateway implements OnGatewayInit, OnGatewayConnection, OnGatewayDisconnect {
     @WebSocketServer() wss: Server;
     
     onLines = {}
