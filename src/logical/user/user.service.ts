@@ -21,7 +21,7 @@ export class UserService {
   async addUser(createUserDTO: CreateUserDTO): Promise<User> {
     let user = await this.userModel.findOne({name: createUserDTO.name});
     console.log(user);
-    if (! user) {
+    if (!user) {
       const newUser = new this.userModel(createUserDTO);
       return newUser.save();
     } else {

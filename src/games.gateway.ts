@@ -21,6 +21,11 @@ export class GamesGateway implements OnGatewayInit, OnGatewayConnection, OnGatew
         console.log(text)
     }
 
+    @SubscribeMessage('move')
+    handelMove(client: Socket, text: string): void {
+        console.log(text)
+        client.broadcast.emit('move' , text)
+    }
     
 
 
